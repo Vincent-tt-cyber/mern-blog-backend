@@ -25,7 +25,7 @@ import { checkAuth, handleValidationErrors } from "./utils/index.js";
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
-    console.log("DB OK");
+    console.log("DB OK"); 
   })
   .catch((err) => {
     console.log("DB Error", err);
