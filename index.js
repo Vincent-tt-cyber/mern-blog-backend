@@ -15,16 +15,14 @@ import {
 } from "./validations.js";
 import { validationResult } from "express-validator";
 
-const PORT = process.env.PORT || 4444;
+const PORT = 4444;
 
 import { UserController, PostController } from "./controllers/index.js";
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
 
 // Подключение к БД MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://admin:wwwwwwww@cluster0.ldlrmad.mongodb.net/blog?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("DB OK");
   })
@@ -93,9 +91,9 @@ app.patch(
 );
 app.get("/posts/:id", PostController.getOne);
 
-app.listen(PORT, (error) => {
+app.listen(process.env.PORT || 4444, (error) => {
   if (error) {
     return console.log(error);
   }
-  console.log(`Server запущен на порту ${PORT}`);
+  console.log(`Server запущен на порту ${process.env.PORT || 4444}`);
 });
